@@ -57,9 +57,9 @@ for (i in rawInstructionsLines) {
   ];
 }
 
-// Move the stacks around
+// Move the stacks around for part 1 -- CVCWCRTVQ
 
-for (i in instructions) {
+/* for (i in instructions) {
   let count = instructions[i][0];
   const from = instructions[i][1];
   const to = instructions[i][2];
@@ -68,6 +68,29 @@ for (i in instructions) {
   }
   for (let c = 0; c < count; c++) {
     let crate = stacks[from].pop();
+    stacks[to].push(crate);
+  }
+}
+
+const topCrates = stacks.map((stack) => stack[stack.length - 1]).join("");
+console.log(topCrates); */
+
+// Move the stacks around for part 2 -- CNSCZWLVT
+
+for (i in instructions) {
+  let count = instructions[i][0];
+  const from = instructions[i][1];
+  const to = instructions[i][2];
+  if (count > stacks[from].length) {
+    count = stacks[from].length;
+  }
+  let bufferStack = [];
+  for (let c = 0; c < count; c++) {
+    let crate = stacks[from].pop();
+    bufferStack.push(crate);
+  }
+  bufferStack.reverse();
+  for (let crate of bufferStack) {
     stacks[to].push(crate);
   }
 }
